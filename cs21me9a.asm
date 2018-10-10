@@ -12,19 +12,21 @@
 # -> If condition is A >= B (NOT A < B), use (A slt B) with BNE $0
 # -> If condition is A <= B (NOT B < A), use (B slt A) with BNE $0
 .macro read_int(%r)
-	li $v0, 5
+
+	addi $v0, $zero ,5
 	syscall
-	move %r, $v0
+	add %r, $zero, $v0
 .end_macro
 .macro print_char(%r)
 	add $a0, $zero, %r
-	li $v0, 11
+	addi $v0, $zero, 11
 	syscall
 .end_macro
 .macro exit
-	li $v0, 10
+	addi $v0, $zero, 10
 	syscall
 .end_macro
+
 main: read_int($t0) # int(read(n)) ; $t0 = n
 blez $t0, exit
 addi $t9, $zero, 90 # tmp = 90 ; $t9 = 90, $k0 = JUMP
